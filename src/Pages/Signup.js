@@ -1,20 +1,30 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-
+import React, { useState } from 'react';
+// import {Link} from 'react-router-dom';
 import Logo from '../olx-logo.png';
 import './Signup.css';
 
 export default function Signup() {
+  const [userName,setUserName]=useState('')
+  const [email,setEmail]=useState('')
+  const[phone,setphone]=useState('')
+  const [password,setPassword]=useState('')
+  const handleSubmit= (e)=>{
+    e.preventDefault();
+    console.log(userName)
+  }
+
   return (
     <div>
       <div className="signupParentDiv">
-        <img width="200px" height="200px" src={Logo}></img>
-        <form>
+        <img width="200px" height="200px" src={Logo}  alt="logo"></img>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="fname">Username</label>
           <br />
           <input
             className="input"
             type="text"
+            value={userName}
+            onChange={(e)=>setUserName(e.target.value)}
             id="fname"
             name="name"
             defaultValue="John"
@@ -25,8 +35,10 @@ export default function Signup() {
           <input
             className="input"
             type="email"
-            id="fname"
+            id="femail"
             name="email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
             defaultValue="John"
           />
           <br />
@@ -35,7 +47,9 @@ export default function Signup() {
           <input
             className="input"
             type="number"
-            id="lname"
+            id="fphone"
+            value={phone}
+            onChange={(e)=>setphone(e.target.value)}
             name="phone"
             defaultValue="Doe"
           />
@@ -45,16 +59,18 @@ export default function Signup() {
           <input
             className="input"
             type="password"
-            id="lname"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
+            id="fpassword"
             name="password"
             defaultValue="Doe"
           />
           <br />
           <br />
-          <button>Signup</button>
+          <button  type="submit">Signup</button>
         </form>
        
-          <a>Login</a>
+          <a href="#">Login</a>
         
       </div>
     </div>
