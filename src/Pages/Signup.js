@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import {Link} from 'react-router-dom';
-import Logo from '../olx-logo.png';
+import Logo from '../olx-logo.png';import { FirebaseContext } from '../store/FirebaseContext';
 import './Signup.css';
 
 export default function Signup() {
+  const {db}=useContext(FirebaseContext)
   const [userName,setUserName]=useState('')
   const [email,setEmail]=useState('')
   const[phone,setphone]=useState('')
   const [password,setPassword]=useState('')
+
+useEffect(()=>{
+  if(!db){
+    console.log("use context db err")
+  }else{
+    console.log("db on sign in",db)
+  }
+  
+},[])
+
+
+
   const handleSubmit= (e)=>{
     e.preventDefault();
-    console.log(userName)
+    console.log( "fuck")
   }
 
   return (

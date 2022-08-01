@@ -26,13 +26,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { FirebaseContext } from './store/FirebaseContext';
+
 import { db } from './Firebase/config/Config';;
 
 
-ReactDOM.render(
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
     <FirebaseContext.Provider value={{db}}>
-        
-            <App/>
-       
+
+        <App />
     </FirebaseContext.Provider>
-    , document.getElementById('root'));
+      
+    );
