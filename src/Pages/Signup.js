@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import {Link} from 'react-router-dom';
-import Logo from '../olx-logo.png';import { FirebaseContext } from '../store/FirebaseContext';
+import Logo from '../olx-logo.png';
+import { FirebaseContext } from '../store/FirebaseContext';
 import './Signup.css';
 
 export default function Signup() {
@@ -11,11 +12,9 @@ export default function Signup() {
   const [password,setPassword]=useState('')
 
 useEffect(()=>{
-  if(!db){
-    console.log("use context db err")
-  }else{
+  
     console.log("db on sign in",db)
-  }
+  
   
 },[])
 
