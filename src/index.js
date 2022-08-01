@@ -25,16 +25,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { FirebaseContext } from './store/FirebaseContext';
-
-import { db } from './Firebase/config/Config';;
+import {  FirebaseAuthContext, FirebaseDataContext } from './store/FirebaseContext';
+import { auth, db } from './Firebase/config/Config';
 
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
-    <FirebaseContext.Provider value={{db}}>
+     <FirebaseAuthContext.Provider value={{auth}}>
+    < FirebaseDataContext.Provider value={{db}}>
 
         <App />
-    </FirebaseContext.Provider>
+    </ FirebaseDataContext.Provider>
+    </FirebaseAuthContext.Provider>
       
     );
