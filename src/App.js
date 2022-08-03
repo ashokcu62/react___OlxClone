@@ -12,10 +12,8 @@ import {  FirebaseDataContext } from './store/FirebaseContext';
 
 
 function App() {
-const{db}=useContext( FirebaseDataContext)
  
   useEffect(()=>{
-console.log(db)
   },[])
   return (
     <div>
