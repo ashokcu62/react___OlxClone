@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Logo from '../../olx-logo.png';
-import { FirebaseAuthContext } from '../../store/FirebaseContext';         // need to find the problm
+import { FirebaseContext } from '../../store/Context';         // need to find the problm
 import './Login.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../Firebase/config/Config';
@@ -18,7 +18,7 @@ export default function Login() {
   }, [])
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
 
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -70,7 +70,7 @@ export default function Login() {
           <button type="submit">Login</button>
         </form>
 
-        <a>Signup</a>
+        <a href='/signup'>Signup</a>
 
       </div>
     </div>

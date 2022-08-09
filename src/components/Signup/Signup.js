@@ -4,13 +4,12 @@ import { addDoc, collection } from 'firebase/firestore';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../olx-logo.png';
-import { FirebaseDataContext, FirebaseAuthContext } from '../../store/FirebaseContext';
+import { FirebaseContext} from '../../store/Context';
 import './Signup.css';
 
 export default function Signup() {
   const navigate = useNavigate("") //route
-  const { db } = useContext(FirebaseDataContext) //firebase data base
-  const { auth } = useContext(FirebaseAuthContext)//authentication
+  const { db,auth } = useContext(FirebaseContext) //firebase  base
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setphone] = useState('')
@@ -41,9 +40,9 @@ console.log("signup page")
             navigate("/login")
           })
         console.log(result.user.email)
-      }).catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage)
+      }).catch((err) => {
+        console.log(err.message)
+        alert(err.message)
       })
 
 
@@ -110,7 +109,7 @@ console.log("signup page")
           <button type="submit">Signup</button>
         </form>
 
-        <a onClick={() => navigate("/login")}>Login</a>
+        <a href='/login'>Login</a>
 
       </div>
     </div>

@@ -7,13 +7,30 @@ import Login from './Pages/Login';
  * ?  =====Import Components=====
  */
 import Home from './Pages/Home';
-import {  FirebaseDataContext } from './store/FirebaseContext';
+import {  AuthContext, FirebaseContext } from './store/Context';
+import { onAuthStateChanged } from 'firebase/auth';
+import Create from './Pages/Create'
 
 
 
 function App() {
- 
+const{user,setUser}=useContext(AuthContext)
+const{auth}=useContext(FirebaseContext)
+
+
   useEffect(()=>{
+
+    /// setting user data
+    onAuthStateChanged(auth,(currentUser)=>{
+      if(currentUser){
+        setUser(currentUser)
+        console.log("user logged")
+      }else{
+      
+       console.log("user is not logged")
+      }
+     })
+     
   },[])
   return (
     <div>
@@ -22,6 +39,7 @@ function App() {
        <Route  path='/'element={ <Home />}></Route>
        <Route path='/signup' element={ <Signup/>}></Route>
        <Route path='/login' element={  <Login/> }></Route>
+       <Route path='/create' element={<Create/> }></Route>
       </Routes>
       </Router>
     </div>
