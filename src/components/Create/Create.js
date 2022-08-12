@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
 
-  const [imgUrl, setImgUrl] = useState("")
+  const url=""
   const [image, setImage] = useState("")
   const [name, setName] = useState("")
   const [category, setCategory] = useState("''")
@@ -29,28 +29,33 @@ const Create = () => {
     uploadBytes(imageRef, image)
       .then((snapShot) => {
 
-        getDownloadURL(snapShot.ref).then((url) => {
-          console.log(url)
-          setImgUrl(url)
+        
+     getDownloadURL(snapShot.ref).then((url) => {                                         // url doesnt set in a variabe
+
+
+      addDoc(collection(db, "products")
+      , {
+        name: name,
+        price: price,
+        category: category,
+        imageUrl: url,
+        userId: user.uid,
+        createdAt: date.toDateString()
+
+      }).then(() => {
+        console.log("added product data success fully")
+        navigate("/")
+      }).catch((err) => {
+        console.log(err.message)
+      })
+ 
+
         }).catch((err) => {
           console.log("error url")
           alert(err.message)
         })
-        addDoc(collection(db, "products")
-          , {
-            name: name,
-            price: price,
-            category: category,
-            imageUrl: imgUrl,
-            userId: user.uid,
-            createdAt: date.toDateString()
 
-          }).then(() => {
-            console.log("added product data success fully")
-            navigate("/")
-          }).catch((err) => {
-            console.log(err.message)
-          })
+       
 
       })
       .catch((err) => alert(err.message))
