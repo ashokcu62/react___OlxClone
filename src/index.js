@@ -14,7 +14,9 @@ root.render(
     <Context>
 
         < FirebaseContext.Provider value={{db,auth,storage}}>
+            
             <App />
+         
         </ FirebaseContext.Provider>
        
     </Context>

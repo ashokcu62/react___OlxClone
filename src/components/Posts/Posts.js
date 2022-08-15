@@ -1,19 +1,39 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { collection, doc, getDocs } from "firebase/firestore";
 import Heart from '../../assets/Heart';
 import { FirebaseContext } from '../../store/Context';
 import './Post.css';
+import { useNavigate } from 'react-router-dom';
+import { PostContext } from '../../store/Postcontext';
+import { collection, getDocs } from 'firebase/firestore';
 
 function Posts() {
+
+
+  const navigate = useNavigate()
+
+
+  // product and seller states
+
   const [products, setProducts] = useState([])
+  const [seller, setSellerDetails] = useState([])
+  const{setPostData,postdata}=useContext(PostContext)
+
+
   const { db } = useContext(FirebaseContext)
+
   useEffect(() => {
+
+
+// fetching product  data from firebase
+
     getDocs(collection(db, "products")).then((data) => {
       console.log(data.docs)
       setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     }).catch((err) => {
       alert(err.message)
     })
+  console.log("post page")
+    console.log( "post context",postdata)
 
   }, [])
 
@@ -24,14 +44,23 @@ function Posts() {
           <span>Quick Menu</span>
           <span>View more</span>
         </div>
-        <div className="cards">
+        <div className="cards" >
+ 
+        {/* fetching datas fron database */}
 
           {products.map((obj) =>
-           <div className="card">
+            <div className="card"
+              onClick={() => {
+
+                // adding product detaits to postcontext
+
+                setPostData(products) 
+                navigate('/view')
+              }}>
               <div className="favorite">
                 <Heart></Heart>
               </div>
-              <div className="image">
+              <div className="image" >
                 <img src={obj.imageUrl} alt="" />
               </div>
               <div className="content">
@@ -40,11 +69,11 @@ function Posts() {
                 <p className="name"> {obj.name}</p>
               </div>
               <div className="date">
-                <span>{obj.name}</span>
+                <span>{obj.createdAt}</span>
               </div>
             </div>
           )}
-          
+
         </div>
       </div>
       <div className="recommendations">

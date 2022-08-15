@@ -56,6 +56,8 @@ function Header() {
         </div>
 
         <div className="loginPage">
+          
+          {/* username */}
 
           {user ? <span> Welcome {user.displayName} </span> : <span onClick={() => { navigate('/login') }} type="button"> login </span>}   {/*can add text with user display*/}
           <hr />
